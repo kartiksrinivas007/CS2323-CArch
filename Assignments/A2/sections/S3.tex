@@ -1,0 +1,47 @@
+\section{Section - 3}
+\vspace{5pt}
+\hrule
+\vspace{5pt}
+The first instruction will load bits 12 through 31 inside the register x3, using the
+value that is stored ,
+the next instruction will load half-word (in an unsigned manner)
+\\
+Half word  = 16 bits  = 4 hexadecimal digits.
+The lower 4 Hexadecimal digits from byte 0 and byte 1 will be used for storage within the least significant bits
+of the register x3.
+\\
+$\textbf{x3 = 0x000000000000a5a5} $
+\\
+Now if instead we load in a signed manner, the CPU will first check the MSB 
+of the 16 bit number being loaded. This a5a5 has the sign bit of $\textbf{0xa = 1010}$
+.Therefore there is an \textbf{extension} of 1's while loading (which is equivalent to the 
+$\textbf{x3} = \textbf{0x}ffffffffffff\textbf{a5a5}$
+\\
+Now loading from  an offset of 2 will load \textbf{Byte 3 and Byte 4} into the register along with thw usual sign extension
+\\
+$\textbf{x3} = \textbf{0x}ffffffffffff\textbf{$a5_{byte-4}a5_{byte-3}$}$
+\\
+Now we load the entire double from Byte-0 onwards, we will get the first double word inside
+the register.
+\\
+$\textbf{x3} = \textbf{0x39933939a55aa5a5}$
+\\
+Now we load from \textbf{Byte 5 onwards}. Since the memory is contiguous, it will start reading into the \textbf{next double word}
+The number stored is then a mix of the higher bytes from the first doubble word and the lower of the second one.
+$\textbf{x3} = \textbf{0x$39933939_{second} 39933939_{first}$}$
+\\
+Next instruction will just load the eight'th byte(7 have been offset)
+\\
+$\textbf{x3} = \textbf{0x0000000000000039}$
+\\
+Now even if I use \textbf{lb} , it won't make a difference because \textbf{0x3 = 0011} and the sign extension 
+will be just of 0's.\\
+$\textbf{x3} = \textbf{0x0000000000000039}$
+\\
+Now , 7'th Byte actually is \textbf{0x93 = 1001 0011}, thsi would imply a sign extension when loaded
+\\
+$\textbf{x3} = \textbf{0xffffffffffffff93}$
+\\
+For code please see \cite{CS2323}
+\vspace{5pt}
+\hrule

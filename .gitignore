@@ -1,2 +1,10 @@
 *.AppImage
 Books
+*.aux
+*.bbl
+*.blg
+*.fls
+*.log
+*.fdb_latexmk
+*.gz
+*.toc
