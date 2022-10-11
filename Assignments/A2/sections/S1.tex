@@ -1,0 +1,44 @@
+\section {Section 1}
+
+\vspace{5pt}
+\hrule
+\vspace{10pt}
+The instruction format along with the binary and then the Hexadecimal is being
+reported
+\begin{enumerate}
+    \item 
+     Instruction Format  - I type 
+     \\ Immediate(7 + 4) - Binary for -4 ( 2's complement ) = 1111 1111 1100
+     \\ rs1 - x22  - 22  - 10110
+     \\ funct3 - 0x0 - 000
+     \\ Opcode - 0010011
+    \\ Net Instruction = \textbf{0xffcb0793}
+    \item Instruction format R - type funct7 - rs2 -rs1 - funct3 -rd -opcode 
+    \\ rs2 - 9 - 01001
+    \\ rs1 - 01000
+    \\ funct3 -0x4
+    \\ rd - 10111
+    \\ - opcode - 011011
+    \\ Net Instruction - \textbf{0x00944b3}   
+    \item Instruction Format - B type - imm  - rs2- rs1- funct3- imm -opcode
+    \\Immediate - 240 =  0 0000 1111 0000
+    \\ rs2 - 00111 
+    \\ rs1 - 1 - 00001
+    \\funct3 - 0x0
+    \\opcode - 1100011
+    \\ Net Instruction - \textbf{0x0e138863}
+    \item Instruction Format S - type - imm - rs2 - rs1 - funct3 - imm - opcode
+    \\ Immediate - 24 -  0 000 000 11000
+    \\ rs1 - 9 - 01001 - rs1 is the one to which the immediate is added (source of data)
+    \\ rs2 - 00110
+    \\ funct3 - 0x3
+    \\ opcode - 0100011
+    \\ Net Instruction  - \textbf{0x0064bc23}
+    \item Instruction type - J - type - imm - rd - opcode
+    \\ Immediate  = -1080  - 2'c complement -  0000 0000 1011 1100 1000
+    \\rd - 8 - 01000
+    \\ opcode - 1101111 
+    \\ Net Instruction - \textbf{0x83dfd46f}
+\end{enumerate}
+\vspace{7pt}
+\hrule
