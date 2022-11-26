@@ -1,5 +1,5 @@
 ## Creators
-## ES20 BTECH11015 - Kartik Srinivas
+## ES20BTECH11015 - Kartik Srinivas
 ## ES20BTECH11003 - Ajit Shankar
 #---------------------------------------------------------------
 #sizes are m_1 n_1 and m_2 n_2, the answer will be stored in m_3 and n_3

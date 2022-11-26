@@ -1,0 +1,57 @@
+\section{Problem 1}
+The cache is $256$ bytes in size, and each block is $8$ bytes each. So the number of blocks in the cache will be $256/8 = 32 $
+so I need 5 buts to access the block address itself ,and each block has 8 bytes, with each memory being addressd to one byte, so we require an offset of 3 bits to keep track of the byte
+being addressed. The total size of the instruction being given is 3 hexadecimals = 12 bit address. So the size of the tag will be equal to $12 - 5 - 3 = 4$ bits.
+let us see the addresses in binary and check for hits and misses
+\\
+\begin{verbatim}[style=customasm, caption={DMP cache}, label=Direct Mapped Cche]
+$0x005$ : $0000 0000 0101$ : Miss - update on block $00000$ = 0  tag = $0000$ = 0
+$0x124$ : $0001 0010 0100$ : Miss - update on block $00100$ = 4  tag = $0001$
+$0x352$ : $0011 0101 0010$ : Miss - update on block $01010$ = 10  tag = $0011$ = 3
+$0x224$ : $0010 0010 0100$ : Miss - update on block $00100$ = 4  tag = $0010$
+$0x126$ : $0001 0010 0110$ : Miss - update on block $00100$ = 4  tag = $0001$
+$0x350$ : $0011 0101 0000$ : Hit - block $01010$ = 10  tag = $0011$
+$0x000$ : $0000 0000 0000$ : Hit - block $00000$ = 0  tag = $0000$
+$0x025$ : $0000 0010 0101$ : Miss - update on block $00010$ = 2  tag = $0000$
+$0x102$ : $0001 0000 0010$ : Miss - update on block $00000$ = 2  tag = $0001$
+$0x120$ : $0001 0010 0000$ : Miss - update on block $00100$ = 4  tag = $0001$
+$0x200$ : $0010 0000 0000$ : Miss - update on block $00000$ = 0  tag = $0010$
+$0x108$ : $0001 0000 1000$ : Miss - update on block $00001$ = 0  tag = $0001$
+$0x000$ : $0000 0000 0000$ : Miss - update on block $00000$ = 0  tag = $0000$
+$0x202$ : $0010 0000 0010$ : Miss - update on block $00000$ = 0  tag = $0010$
+$0x128$ : $0001 0010 1000$ : Miss - update on block $00101$ = 5  tag = $0001$
+$0x350$ : $0011 0101 0000$ : Hit - block $01010$ = 10  tag = $0011$
+\end{verbatim}
+
+\subsection{Calculating hit and miss rate of the cache}
+The hit and miss rate of the cache can be calculated by taking the ratio of the hits to the total number of accesses.
+ = 3/16 = 0.1875 = 18.75\%
+ The miss rate = 1 - 0.1875 = 81.25\%
+ \section{Problem 2}
+ Here we will analyze the situation for a 2 way assosciateive cache , the split will be 5 + 4 + 3
+ The number of blocks remain the same, however every 2 blocks will be free to move within one set of 2 elements
+ so the number of sets = 16, all the bits are invalid at first, so they can be replaced!
+\begin{verbatim}
+$0x005$ : $00000 0000 101$ : Miss update on set $0000$ = 0  tag = $00000$ = 0
+$0x124$ : $00010 0100 100$ : Miss update on set $0100$ = 4  tag = $00010$ = 2
+$0x352$ : $00110 1010 010$ : Miss update on set $1010$ = 10  tag = $00110$ = 6
+$0x224$ : $00100 0100 100$ : Miss update set filled $0100$ = 4  tag = $00100$ = 4, tag = 2
+$0x126$ : $00010 0100 110$ : Hit on set $0100$ = 4  tag = $00010$ = 2
+$0x350$ : $00110 1010 000$ : Hit set $1010$ = 10  tag = $00110$ = 6
+$0x000$ : $00000 0000 000$ : Hit set $0000$ = 0  tag = $00000$
+$0x025$ : $00000 0100 101$ : Miss update + evict on set $0100$ = 4 LRU on tag = $00100$ = 4
+$0x102$ : $00010 0000 010$ : Missset filled  update on set $0000$ = 0  tag = $00010$ = 2
+$0x120$ : $00010 0100 000$ : Hit on set $0100$ = 4  tag = $00010$ = 2
+$0x200$ : $00100 0000 000$ : Miss update + evict LRU on set $0000$ = 0  tag = $00100$
+$0x108$ : $00010 0001 000$ : Miss update on set $0001$ = 0  tag = $00010$
+$0x000$ : $00000 0000 000$ : Miss update + evict on set $0000$ = 0 LRU on tag = $00010$
+$0x202$ : $00100 0000 010$ : Hit on set $0000$ = 0  tag = $00100$
+$0x128$ : $00010 0101 000$ : Miss update on set $0101$ = 5  tag = $00010$
+$0x350$ : $00110 1010 000$ : Hit set $1010$ = 10  tag = $00110$
+\end{verbatim}
+
+\subsection{Calculating hit and miss rate of the cache}
+The hit and miss rate of the cache can be calculated by taking the ratio of the hits to the total number of accesses.
+ = 6/16 = 0.375 = 37.5\%
+ The miss rate = 1 - 0.375 = 62.5\%
+This is significantly higher than that of the direct mapped cache.
